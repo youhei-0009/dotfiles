@@ -11,6 +11,11 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
+"BSで削除できるものを指定する
+" indent  : 行頭の空白
+" eol     : 改行
+" start   : 挿入モード開始位置より手前の文字
+set backspace=indent,eol,start
 
 " 見た目系
 " 行番号を表示

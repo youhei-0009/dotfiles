@@ -46,6 +46,9 @@ PROMPT='%F{green}[%*]% %c%f`rprompt-git-current-branch`$'
 #PROMPT="%F{green}[%*]% %~%f $"
 fi
 
+# プロンプトの右側(RPROMPT)にメソッドの結果を表示させる
+# RPROMPT='`rprompt-git-current-branch`'
+
 #exa エイリアス設定
 alias ls='exa --git --time-style=long-iso -g'
 alias lsa='exa --git --time-style=long-iso -gahl'
@@ -53,8 +56,17 @@ alias lsa='exa --git --time-style=long-iso -gahl'
 # 言語設定
 export LANG=ja_JP.UTF-8
 
-# プロンプトの右側(RPROMPT)にメソッドの結果を表示させる
-# RPROMPT='`rprompt-git-current-branch`'
+# 重複を記録しない
+setopt histignorealldups
+# history
+HISTFILE=${HOME}/.zsh_history
+HISTSIZE=50000
+HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
+SAVEHIST=500000
+# allhistory
+function h { history -E 1 }
+# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
+setopt hist_verify
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -62,9 +74,6 @@ export LANG=ja_JP.UTF-8
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

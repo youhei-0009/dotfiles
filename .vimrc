@@ -39,6 +39,8 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
+" コメントの色を変更
+hi Comment ctermfg=gray
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)

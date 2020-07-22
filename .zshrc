@@ -56,6 +56,13 @@ alias lsa='exa --git --time-style=long-iso -gahl'
 # 言語設定
 export LANG=ja_JP.UTF-8
 
+# 色設定
+export LSCOLORS=gxfxcxdxbxegedabagacad
+export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# export LSCOLORS=gxfxxxxxcxxxxxxxxxgxgx
+# export LS_COLORS='di=01;36:ln=01;35:ex=01;32'
+zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'ex=32'
+
 # 重複を記録しない
 setopt histignorealldups
 # history

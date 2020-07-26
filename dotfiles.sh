@@ -12,6 +12,8 @@ do
   [[ "$f" == ".gitignore" ]] && continue
   [[ "$f" == ".gitmodules" ]] && continue
   [[ "$f" == ".DS_Store" ]] && continue
+  [[ "$f" == "tmux-pane-border" ]] && continue
+
 
   ln -sf ~/dotfiles/$f ~/$f
 done

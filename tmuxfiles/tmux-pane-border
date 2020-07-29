@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-#初期設定の際に$PATHにシンボリックリンク設定すること
+#初期設定
+#$PATHにシンボリックリンク設定(通常/usr/local/bin)
+#ファイルに実行権限を付与(chmod a+x)
 
 if [[ $1 = "ssh" ]]; then
   pane_pid=$2

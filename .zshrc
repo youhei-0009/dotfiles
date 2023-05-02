@@ -82,6 +82,13 @@ function h { history -E 1 }
 # ヒストリを呼び出してから実行する間に一旦編集できる状態になる
 setopt hist_verify
 
+# bat設定
+export BAT_THEME="Monokai Extended"
+alias bt='bat -P'
+# bat ページャーあり
+alias bl='bat'
+
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/

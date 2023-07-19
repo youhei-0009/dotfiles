@@ -88,6 +88,13 @@ alias bt='bat -P'
 # bat ページャーあり
 alias bl='bat'
 
+#kubectl
+alias kb='kubectl'
+alias kblp='kubectl get pod -o wide'
+
+
+#kubernetes plugin ツール krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*

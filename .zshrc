@@ -56,9 +56,13 @@ fi
 # プロンプトの右側(RPROMPT)にメソッドの結果を表示させる
 # RPROMPT='`rprompt-git-current-branch`'
 
-#exa エイリアス設定
-alias ls='exa --git --time-style=long-iso -g'
-alias lsa='exa --git --time-style=long-iso -gahl'
+#exaが廃止なのでezaのエイリアス設定
+alias ls='eza -a'
+alias lsa='eza --git --time-style=long-iso -gahl --total-size'
+alias lsn='eza --git --time-style=long-iso -gahl'
+alias lsf='eza -1f'
+alias lsd='eza -1D'
+alias lst='eza -TD'
 
 # 言語設定
 export LANG=ja_JP.UTF-8
@@ -66,6 +70,7 @@ export LANG=ja_JP.UTF-8
 # 色設定
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export EXA_COLORS="da=32"
 # export LSCOLORS=gxfxxxxxcxxxxxxxxxgxgx
 # export LS_COLORS='di=01;36:ln=01;35:ex=01;32'
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'ex=32'
@@ -92,6 +97,11 @@ alias bl='bat'
 alias kb='kubectl'
 alias kblp='kubectl get pod -o wide'
 
+#kubectx,ns
+alias ct='kubectx'
+alias ctc='kubectx -c'
+alias ns='kubens'
+alias nsc='kubens -c'
 
 #kubernetes plugin ツール krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -106,7 +116,10 @@ plugins=(git)
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-eval "$(anyenv init -)"
+if [ -d $HOME/.anyenv ] ; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+fi
 
 #grepに-Pオプションを追加
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
@@ -135,3 +148,46 @@ export PATH="/opt/homebrew/opt/icu4c/bin:$PATH"
 export PATH="/opt/homebrew/opt/tidy-html5/lib:$PATH"
 export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+# シンタックスハイライト
+zinit light zsh-users/zsh-syntax-highlighting
+#入力補完
+zinit light zsh-users/zsh-autosuggestions
+
+### End of Zinit's installer chunk
+
+#flutter PATH and setting
+export PATH=$HOME/workspace/development/flutter/bin:$PATH
+alias flutter="fvm flutter"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/yohei.yauchi/.dart-cli-completion/zsh-config.zsh ]] && . /Users/yohei.yauchi/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+export PATH="/Users/yohei.yauchi/.pub-cache/bin:$PATH"
